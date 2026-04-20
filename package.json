@@ -1,0 +1,20 @@
+{
+  "name": "edai-ty-2nd-sem",
+  "version": "1.0.0",
+  "description": "## Backend cd backend npm install node server.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run dev --prefix frontend\" \"python -m uvicorn backend.main:app --reload\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
