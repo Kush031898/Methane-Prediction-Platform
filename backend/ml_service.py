@@ -24,10 +24,11 @@ except Exception as e:
     print(f"Error loading scaler: {e}")
     scaler = None
 
-def predict_methane(cod: float, flow: float, c_n_ratio: float, temp: float, ph: float, hrt: float, time: float) -> float:
+def predict_methane(cod: float, flow: float, c_n_ratio: float, temp: float, ph: float, hrt: float, time: float):
     if model is None or scaler is None:
         raise ValueError("Machine Learning model or scaler is not loaded. Ensure methane_model.pkl and scaler.pkl exist.")
         
+    feature_names = ["COD", "Flow_OLR", "C_N_Ratio", "Temperature", "pH", "HRT", "Time"]
     features = pd.DataFrame([{
         "COD": cod,
         "Flow_OLR": flow,
@@ -41,4 +42,19 @@ def predict_methane(cod: float, flow: float, c_n_ratio: float, temp: float, ph: 
     features_scaled = scaler.transform(features)
     prediction = model.predict(features_scaled)
     
-    return float(prediction[0])
+    importances_dict = {}
+    if hasattr(model, 'feature_importances_'):
+        importances = model.feature_importances_
+        # Normalize to percentage
+        importances_dict = {
+            name: round(float(imp) * 100, 2)
+            for name, imp in zip(feature_names, importances)
+        }
+    else:
+        # Fallback if the model type doesn't support it
+        importances_dict = {name: round(100.0 / len(feature_names), 2) for name in feature_names}
+    
+    return {
+        "prediction": float(prediction[0]),
+        "feature_importances": importances_dict
+    }

@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 import { AuthContext } from './context/AuthContext'
 import Dashboard from './pages/Dashboard'
 import History from './pages/History'
@@ -16,8 +17,33 @@ function App() {
 
   return (
     <>
+      <Toaster 
+        position="top-right" 
+        toastOptions={{
+          style: {
+            background: 'var(--panel-bg)',
+            color: 'var(--text-primary)',
+            border: '1px solid var(--panel-border)',
+            backdropFilter: 'blur(12px)',
+          },
+          success: {
+            iconTheme: {
+              primary: 'var(--secondary-color)',
+              secondary: '#fff',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: 'var(--danger-color)',
+              secondary: '#fff',
+            },
+          },
+        }} 
+      />
+      
       <nav className="navbar glass-panel">
-        <div className="nav-brand">
+        <div className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <img src="/methane.png" alt="MethaneML Logo" style={{ width: '28px', height: '28px' }} />
           <span className="gradient-text" style={{fontWeight: 'bold', fontSize: '1.2rem'}}>MethaneML</span>
         </div>
         <div className="nav-links">
@@ -26,8 +52,7 @@ function App() {
               <Link to="/" className="nav-link">Dashboard</Link>
               <Link to="/history" className="nav-link">History</Link>
               <div className="user-profile">
-                <span className="user-role">{user.role}</span>
-                <span className="username">{user.username}</span>
+                <span className="username">Hello, {user.first_name || user.username}</span>
                 <button onClick={logout} className="btn-sm btn-outline">Logout</button>
               </div>
             </>

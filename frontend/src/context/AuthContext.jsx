@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 
 // API Base URL moved outside to prevent recreation on re-renders, which stripping the token
 const api = axios.create({
-    baseURL: 'http://localhost:8000'
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000'
 });
 
 export const AuthProvider = ({ children }) => {
@@ -50,8 +50,14 @@ export const AuthProvider = ({ children }) => {
         navigate('/');
     };
 
-    const register = async (username, password, role) => {
-        await api.post('/users/register', { username, password, role });
+    const register = async (firstName, lastName, username, password, confirmPassword) => {
+        await api.post('/users/register', { 
+            first_name: firstName, 
+            last_name: lastName, 
+            username: username, 
+            password: password,
+            confirm_password: confirmPassword
+        });
         await login(username, password);
     };
 

@@ -4,6 +4,6 @@ scikit-learn
 pandas
 python-jose[cryptography]
 passlib[bcrypt]
-sqlalchemy
+pymongo
 pydantic
 python-multipart

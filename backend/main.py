@@ -1,10 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .models import engine, Base
 from .routers import users, predict
-
-# Create tables if not exist
-Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Methane Prediction API")
 
