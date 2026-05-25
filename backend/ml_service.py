@@ -2,7 +2,7 @@ import pickle
 import os
 import pandas as pd
 
-# Paths to the user's ML files in the parent directory
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_PATH = os.path.join(BASE_DIR, "methane_model.pkl")
 SCALER_PATH = os.path.join(BASE_DIR, "scaler.pkl")

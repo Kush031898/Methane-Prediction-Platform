@@ -4,10 +4,10 @@ from .routers import users, predict
 
 app = FastAPI(title="Methane Prediction API")
 
-# Add CORS middleware to allow requests from the React frontend
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, change to the actual frontend URL
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
