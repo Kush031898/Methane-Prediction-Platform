@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { AuthContext } from './context/AuthContext'
@@ -10,6 +10,21 @@ import './App.css'
 
 function App() {
   const { user, logout, loading } = useContext(AuthContext)
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      // Calculate percentage positions
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      
+      // Update global CSS variables for the background glow
+      document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+      document.documentElement.style.setProperty('--mouse-y', `${y}%`);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   if (loading) {
     return <div className="loading-screen">Loading...</div>

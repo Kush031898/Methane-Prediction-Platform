@@ -488,12 +488,6 @@ const Dashboard = () => {
                                 <h5 style={{ color: 'var(--text-muted)', marginBottom: '1rem', textAlign: 'left', fontWeight: '500' }}>Historical Yield Trend</h5>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <AreaChart data={historyData} margin={{ top: 5, right: 10, left: -25, bottom: 5 }}>
-                                        <defs>
-                                            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                                <stop offset="5%" stopColor="#00ff9d" stopOpacity={0.6} />
-                                                <stop offset="95%" stopColor="#00ff9d" stopOpacity={0} />
-                                            </linearGradient>
-                                        </defs>
                                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                                         <XAxis
                                             dataKey="timestamp"
@@ -513,8 +507,8 @@ const Dashboard = () => {
                                             name="Methane Output"
                                             stroke="#00ff9d"
                                             strokeWidth={2}
-                                            fillOpacity={1}
-                                            fill="url(#colorUv)"
+                                            fillOpacity={0.3}
+                                            fill="#00ff9d"
                                             isAnimationActive={false}
                                         />
                                     </AreaChart>
