@@ -9,6 +9,7 @@ import {
 } from 'recharts'
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import html2canvas from 'html2canvas';
 
 let dashboardCache = null;
 
@@ -139,7 +140,7 @@ const Dashboard = () => {
         }
     }
 
-    const generateReport = () => {
+    const generateReport = async () => {
         const doc = new jsPDF();
         
         // Header
@@ -208,6 +209,33 @@ const Dashboard = () => {
         const splitDesc = doc.splitTextToSize(feedbackDesc, 180);
         doc.text(splitDesc, 14, finalY + 58);
         
+        // Capture Charts
+        const chartsElement = document.getElementById('charts-container');
+        if (chartsElement) {
+            try {
+                // Use html2canvas to capture the visual charts
+                const canvas = await html2canvas(chartsElement, { 
+                    backgroundColor: '#121212', // Match dark theme bg
+                    scale: 2 // High quality
+                });
+                const imgData = canvas.toDataURL('image/png');
+                
+                // Add a new page for charts so it fits nicely
+                doc.addPage();
+                doc.setFontSize(16);
+                doc.setTextColor(14, 165, 233);
+                doc.text('Visual Analytics:', 14, 20);
+                
+                // Scale image to fit A4 page width (210mm)
+                const imgWidth = 182; 
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                
+                doc.addImage(imgData, 'PNG', 14, 30, imgWidth, imgHeight);
+            } catch (err) {
+                console.error('Error capturing charts for PDF:', err);
+            }
+        }
+
         // Footer
         doc.setFontSize(10);
         doc.setTextColor(150);
@@ -332,7 +360,7 @@ const Dashboard = () => {
                             </button>
                         </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '2rem' }}>
+                        <div id="charts-container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '2rem' }}>
 
                             {/* Parameter Influence Horizontal Bar Chart */}
                             {influenceData.length > 0 && (

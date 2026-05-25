@@ -3,7 +3,7 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { AuthContext } from './context/AuthContext'
 import Dashboard from './pages/Dashboard'
-import History from './pages/History'
+import Reports from './pages/Reports'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import './App.css'
@@ -50,7 +50,7 @@ function App() {
           {user ? (
             <>
               <Link to="/" className="nav-link">Dashboard</Link>
-              <Link to="/history" className="nav-link">History</Link>
+              <Link to="/reports" className="nav-link">Reports</Link>
               <div className="user-profile">
                 <span className="username">Hello, {user.first_name || user.username}</span>
                 <button onClick={logout} className="btn-sm btn-outline">Logout</button>
@@ -68,7 +68,7 @@ function App() {
       <main className="main-content">
         <Routes>
           <Route path="/" element={user ? <Dashboard /> : <Navigate to="/login" />} />
-          <Route path="/history" element={user ? <History /> : <Navigate to="/login" />} />
+          <Route path="/reports" element={user ? <Reports /> : <Navigate to="/login" />} />
           <Route path="/login" element={!user ? <Login /> : <Navigate to="/" />} />
           <Route path="/register" element={!user ? <Register /> : <Navigate to="/" />} />
         </Routes>
