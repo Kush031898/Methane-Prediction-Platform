@@ -396,8 +396,8 @@ const Dashboard = () => {
                                             <PolarGrid stroke="rgba(255,255,255,0.05)" />
                                             <PolarAngleAxis dataKey="subject" tick={{ fill: 'var(--text-muted)', fontSize: 10 }} />
                                             <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                                            <Radar name="Current Setup" dataKey="value" stroke="var(--primary-color)" strokeWidth={2} fill="var(--primary-color)" fillOpacity={0.3} />
-                                            <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-color)', borderColor: 'var(--panel-border)', borderRadius: '8px', color: '#fff' }} itemStyle={{ color: 'var(--primary-color)' }} />
+                                            <Radar name="Current Setup" dataKey="value" stroke="#0ea5e9" strokeWidth={2} fill="#0ea5e9" fillOpacity={0.3} />
+                                            <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-color)', borderColor: 'var(--panel-border)', borderRadius: '8px', color: '#fff' }} itemStyle={{ color: '#0ea5e9' }} />
                                         </RadarChart>
                                     </ResponsiveContainer>
                                 </div>
@@ -417,8 +417,8 @@ const Dashboard = () => {
                                                 contentStyle={{ backgroundColor: 'var(--bg-color)', borderColor: 'var(--panel-border)', borderRadius: '8px', color: '#fff' }}
                                             />
                                             <Legend iconType="circle" wrapperStyle={{ fontSize: '10px' }} />
-                                            <Bar dataKey="actual" name="Actual" fill="var(--primary-color)" radius={[4, 4, 0, 0]} />
-                                            <Bar dataKey="optimal" name="Optimal" fill="var(--secondary-color)" radius={[4, 4, 0, 0]} />
+                                            <Bar dataKey="actual" name="Actual" fill="#0ea5e9" radius={[4, 4, 0, 0]} />
+                                            <Bar dataKey="optimal" name="Optimal" fill="#10b981" radius={[4, 4, 0, 0]} />
                                         </BarChart>
                                     </ResponsiveContainer>
                                 </div>
@@ -473,8 +473,8 @@ const Dashboard = () => {
                                     <AreaChart data={historyData} margin={{ top: 5, right: 10, left: -25, bottom: 5 }}>
                                         <defs>
                                             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                                <stop offset="5%" stopColor="var(--primary-color)" stopOpacity={0.6} />
-                                                <stop offset="95%" stopColor="var(--primary-color)" stopOpacity={0} />
+                                                <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.6} />
+                                                <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0} />
                                             </linearGradient>
                                         </defs>
                                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -494,7 +494,7 @@ const Dashboard = () => {
                                             type="monotone"
                                             dataKey="predicted_methane"
                                             name="Methane Output"
-                                            stroke="var(--primary-color)"
+                                            stroke="#0ea5e9"
                                             strokeWidth={2}
                                             fillOpacity={1}
                                             fill="url(#colorUv)"
