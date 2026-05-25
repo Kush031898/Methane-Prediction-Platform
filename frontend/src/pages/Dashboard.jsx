@@ -376,7 +376,7 @@ const Dashboard = () => {
                                                 contentStyle={{ backgroundColor: 'var(--bg-color)', borderColor: 'var(--panel-border)', borderRadius: '8px', color: '#10B981' }}
                                                 formatter={(value) => [`${value}%`, 'Influence']}
                                             />
-                                            <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={20}>
+                                            <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={20} isAnimationActive={false}>
                                                 {influenceData.map((entry, index) => (
                                                     <Cell key={`cell-${index}`} fill={entry.color} />
                                                 ))}
@@ -396,7 +396,7 @@ const Dashboard = () => {
                                             <PolarGrid stroke="rgba(255,255,255,0.05)" />
                                             <PolarAngleAxis dataKey="subject" tick={{ fill: 'var(--text-muted)', fontSize: 10 }} />
                                             <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                                            <Radar name="Current Setup" dataKey="value" stroke="#0ea5e9" strokeWidth={2} fill="#0ea5e9" fillOpacity={0.3} />
+                                            <Radar name="Current Setup" dataKey="value" stroke="#0ea5e9" strokeWidth={2} fill="#0ea5e9" fillOpacity={0.3} isAnimationActive={false} />
                                             <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-color)', borderColor: 'var(--panel-border)', borderRadius: '8px', color: '#fff' }} itemStyle={{ color: '#0ea5e9' }} />
                                         </RadarChart>
                                     </ResponsiveContainer>
@@ -417,8 +417,8 @@ const Dashboard = () => {
                                                 contentStyle={{ backgroundColor: 'var(--bg-color)', borderColor: 'var(--panel-border)', borderRadius: '8px', color: '#fff' }}
                                             />
                                             <Legend iconType="circle" wrapperStyle={{ fontSize: '10px' }} />
-                                            <Bar dataKey="actual" name="Actual" fill="#0ea5e9" radius={[4, 4, 0, 0]} />
-                                            <Bar dataKey="optimal" name="Optimal" fill="#10b981" radius={[4, 4, 0, 0]} />
+                                            <Bar dataKey="actual" name="Actual" fill="#0ea5e9" radius={[4, 4, 0, 0]} isAnimationActive={false} />
+                                            <Bar dataKey="optimal" name="Optimal" fill="#10b981" radius={[4, 4, 0, 0]} isAnimationActive={false} />
                                         </BarChart>
                                     </ResponsiveContainer>
                                 </div>
@@ -498,6 +498,7 @@ const Dashboard = () => {
                                             strokeWidth={2}
                                             fillOpacity={1}
                                             fill="url(#colorUv)"
+                                            isAnimationActive={false}
                                         />
                                     </AreaChart>
                                 </ResponsiveContainer>
