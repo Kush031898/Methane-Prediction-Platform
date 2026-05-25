@@ -6,7 +6,7 @@ import {
 } from 'recharts';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import html2canvas from 'html2canvas';
+import { toPng } from 'html-to-image';
 
 export const AnimatedNumber = ({ value }) => {
     const [displayValue, setDisplayValue] = useState(0);
@@ -122,36 +122,26 @@ const AnalyticsView = ({ prediction, formData, influenceData = [], historyData =
         const chartsElement = document.getElementById('charts-container');
         if (chartsElement) {
             try {
-                const svgs = chartsElement.querySelectorAll('svg');
-                svgs.forEach(svg => {
-                    const rect = svg.getBoundingClientRect();
-                    svg.setAttribute('width', rect.width);
-                    svg.setAttribute('height', rect.height);
-                    svg.style.width = `${rect.width}px`;
-                    svg.style.height = `${rect.height}px`;
+                // Use html-to-image which natively supports Recharts SVGs perfectly
+                const dataUrl = await toPng(chartsElement, { 
+                    backgroundColor: '#050b14', // Deep carbon background
+                    pixelRatio: 2
                 });
-
-                const canvas = await html2canvas(chartsElement, { 
-                    backgroundColor: '#121212',
-                    scale: 2
-                });
-                
-                svgs.forEach(svg => {
-                    svg.style.width = '';
-                    svg.style.height = '';
-                });
-
-                const imgData = canvas.toDataURL('image/png');
                 
                 doc.addPage();
                 doc.setFontSize(16);
                 doc.setTextColor(14, 165, 233);
                 doc.text('Visual Analytics:', 14, 20);
                 
-                const imgWidth = 182; 
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                // Get image dimensions to scale it correctly on A4
+                const img = new Image();
+                img.src = dataUrl;
+                await new Promise(resolve => img.onload = resolve);
                 
-                doc.addImage(imgData, 'PNG', 14, 30, imgWidth, imgHeight);
+                const imgWidth = 182; 
+                const imgHeight = (img.height * imgWidth) / img.width;
+                
+                doc.addImage(dataUrl, 'PNG', 14, 30, imgWidth, imgHeight);
             } catch (err) {
                 console.error('Error capturing charts for PDF:', err);
             }
