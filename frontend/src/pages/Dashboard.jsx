@@ -413,8 +413,8 @@ const Dashboard = () => {
                                             <PolarGrid stroke="rgba(255,255,255,0.05)" />
                                             <PolarAngleAxis dataKey="subject" tick={{ fill: 'var(--text-muted)', fontSize: 10 }} />
                                             <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
-                                            <Radar name="Current Setup" dataKey="value" stroke="#0ea5e9" strokeWidth={2} fill="#0ea5e9" fillOpacity={0.3} isAnimationActive={false} />
-                                            <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-color)', borderColor: 'var(--panel-border)', borderRadius: '8px', color: '#fff' }} itemStyle={{ color: '#0ea5e9' }} />
+                                            <Radar name="Current Setup" dataKey="value" stroke="#00ff9d" strokeWidth={2} fill="#00ff9d" fillOpacity={0.3} isAnimationActive={false} />
+                                            <RechartsTooltip contentStyle={{ backgroundColor: 'var(--bg-color)', borderColor: 'var(--panel-border)', borderRadius: '8px', color: '#fff' }} itemStyle={{ color: '#00ff9d' }} />
                                         </RadarChart>
                                     </ResponsiveContainer>
                                 </div>
@@ -435,7 +435,7 @@ const Dashboard = () => {
                                             />
                                             <Legend iconType="circle" wrapperStyle={{ fontSize: '10px' }} />
                                             <Bar dataKey="actual" name="Actual" fill="#0ea5e9" radius={[4, 4, 0, 0]} isAnimationActive={false} />
-                                            <Bar dataKey="optimal" name="Optimal" fill="#10b981" radius={[4, 4, 0, 0]} isAnimationActive={false} />
+                                            <Bar dataKey="optimal" name="Optimal" fill="#00ff9d" radius={[4, 4, 0, 0]} isAnimationActive={false} />
                                         </BarChart>
                                     </ResponsiveContainer>
                                 </div>
@@ -462,7 +462,7 @@ const Dashboard = () => {
                                                 <div style={{ textAlign: 'right', paddingRight: '8px', fontSize: '0.7rem', color: 'var(--text-muted)', alignSelf: 'center' }}>{['Temp', 'C/N', 'HRT', 'COD', 'Yield'][i]}</div>
                                                 {row.map((val, j) => (
                                                     <div key={`${i}-${j}`} style={{
-                                                        backgroundColor: val === 1 ? 'rgba(16, 185, 129, 0.8)' : val > 0.3 ? 'rgba(16, 185, 129, 0.5)' : val > 0.1 ? 'rgba(16, 185, 129, 0.2)' : val < -0.3 ? 'rgba(239, 68, 68, 0.5)' : val < -0.1 ? 'rgba(239, 68, 68, 0.2)' : 'rgba(255, 255, 255, 0.05)',
+                                                        backgroundColor: val === 1 ? 'rgba(0, 255, 157, 0.8)' : val > 0.3 ? 'rgba(0, 255, 157, 0.5)' : val > 0.1 ? 'rgba(0, 255, 157, 0.2)' : val < -0.3 ? 'rgba(255, 42, 85, 0.5)' : val < -0.1 ? 'rgba(255, 42, 85, 0.2)' : 'rgba(255, 255, 255, 0.05)',
                                                         display: 'flex',
                                                         alignItems: 'center',
                                                         justifyContent: 'center',
@@ -490,8 +490,8 @@ const Dashboard = () => {
                                     <AreaChart data={historyData} margin={{ top: 5, right: 10, left: -25, bottom: 5 }}>
                                         <defs>
                                             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                                                <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.6} />
-                                                <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0} />
+                                                <stop offset="5%" stopColor="#00ff9d" stopOpacity={0.6} />
+                                                <stop offset="95%" stopColor="#00ff9d" stopOpacity={0} />
                                             </linearGradient>
                                         </defs>
                                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -511,7 +511,7 @@ const Dashboard = () => {
                                             type="monotone"
                                             dataKey="predicted_methane"
                                             name="Methane Output"
-                                            stroke="#0ea5e9"
+                                            stroke="#00ff9d"
                                             strokeWidth={2}
                                             fillOpacity={1}
                                             fill="url(#colorUv)"
