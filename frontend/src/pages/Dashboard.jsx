@@ -213,11 +213,28 @@ const Dashboard = () => {
         const chartsElement = document.getElementById('charts-container');
         if (chartsElement) {
             try {
+                // Fix for Recharts SVGs collapsing in html2canvas
+                const svgs = chartsElement.querySelectorAll('svg');
+                svgs.forEach(svg => {
+                    const rect = svg.getBoundingClientRect();
+                    svg.setAttribute('width', rect.width);
+                    svg.setAttribute('height', rect.height);
+                    svg.style.width = `${rect.width}px`;
+                    svg.style.height = `${rect.height}px`;
+                });
+
                 // Use html2canvas to capture the visual charts
                 const canvas = await html2canvas(chartsElement, { 
                     backgroundColor: '#121212', // Match dark theme bg
                     scale: 2 // High quality
                 });
+                
+                // Revert SVG styles so UI doesn't break on resize
+                svgs.forEach(svg => {
+                    svg.style.width = '';
+                    svg.style.height = '';
+                });
+
                 const imgData = canvas.toDataURL('image/png');
                 
                 // Add a new page for charts so it fits nicely
